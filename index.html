@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Slepička Tamagotchi 0.6.4 – Asset pack</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="root" class="app">
+  <div class="top"><div class="title">🐔 Slepička Tamagotchi 0.6.4</div><div class="pill" id="clock">--:--</div></div>
+  <div id="newGame" class="card" style="margin-top:14px;display:none">
+    <h2>Nové vajíčko</h2>
+    <p class="small">Do hry je vložen nový ilustrovaný asset pack – kurník, slepička, kuřátko, vajíčko i farmářské doplňky.</p>
+    <div class="namebox"><input id="chickenName" placeholder="Jméno slepičky" value="Kokoška"><button onclick="startGame()">Začít líhnout</button></div>
+    <div style="margin-top:12px"><button class="btn secondary" onclick="previewRandomColor()">🎨 Ukázat jinou náhodnou barvu</button> <span id="previewColor" class="colorchip"></span></div>
+  </div>
+
+  <div id="game" class="grid">
+    <div class="card stage" id="stageCard">
+      <div class="sceneBackdrop" aria-hidden="true"></div>
+      <div class="sceneLight" aria-hidden="true"></div>
+
+      <div class="progressRing" id="lifeBadge">🥚 0 %</div>
+      <div class="eggCounter" id="eggCounter">🥚 0</div>
+      <div class="thoughtBubble hidden" id="thoughtBubble">💭</div>
+
+      <div class="weather" id="weatherEffects">
+        <div class="sun"></div>
+        <div class="moon"></div>
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+      </div>
+      <div class="weatherOverlay"></div>
+
+      <div class="scenePropLayer" aria-hidden="true">
+        <div class="sceneProp propDustbath"><img src="assets/dustbath.png" alt=""></div>
+        <div class="sceneProp propFeeder"><img src="assets/feeder.png" alt=""></div>
+        <div class="sceneProp propWaterer"><img src="assets/waterer.png" alt=""></div>
+      </div>
+
+      <div id="perch" class="perch hidden"></div>
+      <div id="nest" class="nest"></div>
+      <div id="lamp" class="lamp hidden"></div>
+
+      <div id="hero" class="hero">
+        <div class="shadow"></div>
+        <div id="actionFx" class="actionFx"></div>
+        <div id="petArt"></div>
+        <div id="sleepMarks" class="hidden">
+          <div class="sleep-z">Z</div><div class="sleep-z">Z</div><div class="sleep-z">Z</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="info">
+        <div class="row"><span>Jméno</span><span id="petName">-</span></div>
+        <div class="row"><span>Fáze</span><span id="phaseName">-</span></div>
+        <div class="row"><span>Věk</span><span id="ageText">-</span></div>
+        <div class="row"><span>Počasí</span><span id="weatherText">načítám…</span></div>
+        <div class="row"><span>Východ / západ</span><span id="sunText">-</span></div><div class="row"><span>Povaha</span><span id="traitText">-</span></div><div class="row"><span>Aktivita</span><span id="activityText">-</span></div><div class="row"><span>Vejce</span><span id="eggsText">0</span></div>
+      </div>
+      <div class="bars" style="margin-top:12px">
+        <div><div class="stat"><span>🍽️ Hlad</span><span id="hungerNum"></span></div><div class="bar"><span id="hungerBar"></span></div></div>
+        <div><div class="stat"><span>💧 Žízeň</span><span id="thirstNum"></span></div><div class="bar"><span id="thirstBar"></span></div></div>
+        <div><div class="stat"><span>❤️ Zdraví</span><span id="healthNum"></span></div><div class="bar"><span id="healthBar"></span></div></div>
+        <div><div class="stat"><span>😊 Spokojenost</span><span id="happyNum"></span></div><div class="bar"><span id="happyBar"></span></div></div>
+      </div>
+      <div class="actions">
+        <button onclick="feed()">🌾 Nasypat krmení</button>
+        <button onclick="water()">💧 Doplnit vodu</button>
+        <button onclick="clean()">🧹 Vyčistit</button>
+        <button onclick="warm()">🔥 Zahřát</button>
+      </div>
+      <div class="tabs"><div class="tab active" onclick="tab('log', this)">Deník</div><div class="tab" onclick="tab('mini', this)">Minihra</div><div class="tab" onclick="tab('stats', this)">Statistiky</div><div class="tab" onclick="tab('ach', this)">Ocenění</div><div class="tab" onclick="tab('gallery', this)">Fáze</div><div class="tab" onclick="tab('save', this)">Záloha</div></div>
+      <div id="panel-log" class="panel active"><div class="log" id="log"></div></div>
+      <div id="panel-gallery" class="panel"><div class="gallery" id="gallery"></div></div>
+      <div id="panel-stats" class="panel"><div class="statsGrid" id="lifeStats"></div></div><div id="panel-ach" class="panel"><div class="badgeGrid" id="achievements"></div></div><div id="panel-save" class="panel"><div class="actions"><button onclick="exportSave()">⬇️ Export JSON</button><button onclick="document.getElementById('importFile').click()">⬆️ Import JSON</button><button class="danger" onclick="resetGame()">🗑️ Nová hra</button></div><input id="importFile" type="file" accept="application/json" style="display:none" onchange="importSave(event)"><p class="small">Ukládá se automaticky do prohlížeče. Export si nech jako zálohu.</p></div>
+      <div id="panel-mini" class="panel"><p class="small">🌱 Hrabání ve výběhu: máš omezený počet hrábnutí. Po dešti je větší šance na červíky.</p><div id="miniInfo" class="miniStatus"></div><div class="minigame" id="minigame"></div><div id="miniResult" class="miniResult hidden"></div></div>
+    </div>
+  </div>
+  <div class="footer">Jablonec nad Nisou • počasí přes Open-Meteo • verze 0.6.4 • čistá dynamická scéna + počasí a roční období</div>
+</div>
+<script src="js/game.js"></script>
+</body>
+</html>
