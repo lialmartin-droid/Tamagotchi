@@ -355,3 +355,14 @@ function render(){
   renderWeatherGraphics(); renderLog(); renderGallery(); renderMini(); renderStats(); renderAchievements();
 }
 setTimeout(()=>{try{ensureAssetPack();render();}catch(e){}},0);
+
+
+/* 0.6.1 – pomocné přepnutí počasí pro testování vzhledu */
+window.setDemoWeather = function(type){
+  if(!state) return;
+  const allowed=['jasno','polojasno','zataženo','mlha','déšť','sníh','bouřka'];
+  if(!allowed.includes(type)) return;
+  state.weather={temp: type==='sníh' ? -2 : (type==='déšť'||type==='bouřka' ? 12 : 22), code:null, text:type};
+  state.weatherAt=now();
+  render();
+};

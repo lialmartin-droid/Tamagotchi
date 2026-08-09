@@ -1010,3 +1010,181 @@ body.weather-rain .sceneGroundDetails,body.weather-storm .sceneGroundDetails{fil
   #lamp{width:72px;height:108px;left:61%}
   .phase-hen .petSprite,.phase-matron .petSprite{width:150px}
 }
+
+
+/* ============================================================
+   0.6.1 – OPRAVA ASSETŮ
+   Schválené obrázky se vykreslují jako samostatné IMG vrstvy.
+   Staré CSS objekty jsou vypnuté, aby je nemohly přebít.
+   ============================================================ */
+
+.stage{
+  isolation:isolate !important;
+  min-height:650px !important;
+}
+
+/* Staré CSS kresby statických objektů vypnout */
+#coop,
+.yardItem.feeder,
+.yardItem.waterer,
+.yardItem.flowers,
+.rainShelter{
+  display:none !important;
+}
+
+/* Nové obrázkové assety */
+.assetScene{
+  position:absolute;
+  inset:0;
+  z-index:10;
+  pointer-events:none;
+}
+.assetScene .asset{
+  position:absolute;
+  display:block !important;
+  object-fit:contain;
+  user-select:none;
+  -webkit-user-drag:none;
+  filter:drop-shadow(0 10px 10px rgba(31,20,10,.18));
+}
+.asset-coop{
+  width:min(49%,390px);
+  left:1.5%;
+  bottom:20%;
+}
+.asset-feeder{
+  width:min(25%,175px);
+  left:10%;
+  bottom:5%;
+}
+.asset-waterer{
+  width:min(19%,130px);
+  right:5%;
+  bottom:5.5%;
+}
+.asset-dustbath{
+  width:min(28%,190px);
+  right:20%;
+  bottom:4%;
+}
+
+/* Vajíčko / zvíře musí být nad statickými assety */
+.hero{
+  z-index:24 !important;
+}
+#petArt{
+  width:100% !important;
+  height:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+#petArt img,
+#petArt .petSprite,
+#petArt .petSpriteWrap{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+.hero.phase-egg{
+  width:145px !important;
+  height:185px !important;
+  left:50% !important;
+  bottom:18% !important;
+  transform:translateX(-50%) !important;
+}
+.hero.phase-egg .petSprite{
+  width:112px !important;
+  height:auto !important;
+  max-height:160px !important;
+  object-fit:contain !important;
+}
+.hero.phase-chick{
+  width:150px !important;
+  height:160px !important;
+}
+.hero.phase-chick .petSprite{
+  width:135px !important;
+  height:auto !important;
+}
+.hero.phase-pullet .petSprite{
+  width:155px !important;
+  height:auto !important;
+}
+.hero.phase-hen .petSprite,
+.hero.phase-matron .petSprite{
+  width:185px !important;
+  height:auto !important;
+}
+
+/* Hnízdo, bidlo a lampa jako schválené obrázky */
+#nest{
+  display:block;
+  left:50% !important;
+  bottom:9% !important;
+  width:170px !important;
+  height:115px !important;
+  transform:translateX(-50%) !important;
+  background:url('../assets/nest-prop.png') center/contain no-repeat !important;
+  border:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  z-index:18 !important;
+}
+#nest.hidden{display:none !important;}
+#nest::before,#nest::after{display:none !important;}
+
+#perch{
+  left:58% !important;
+  bottom:39% !important;
+  width:155px !important;
+  height:92px !important;
+  background:url('../assets/perch.png') center/contain no-repeat !important;
+  box-shadow:none !important;
+  border:0 !important;
+  z-index:19 !important;
+}
+#perch.hidden{display:none !important;}
+
+#lamp{
+  left:56% !important;
+  top:auto !important;
+  bottom:37% !important;
+  width:88px !important;
+  height:132px !important;
+  transform:none !important;
+  background:url('../assets/lamp.png') center/contain no-repeat !important;
+  box-shadow:none !important;
+  border:0 !important;
+  clip-path:none !important;
+  z-index:20 !important;
+}
+#lamp.hidden{display:none !important;}
+#lamp::before,#lamp::after{display:none !important;}
+
+/* Původní velká prašná/cestová skvrna byla moc dominantní */
+.yardPath{
+  left:8% !important;
+  right:7% !important;
+  bottom:1% !important;
+  height:165px !important;
+  opacity:.30 !important;
+  z-index:3 !important;
+}
+.yardPath::before{opacity:.2 !important;}
+
+/* Počasí je nad scénou, ale pod UI */
+.weatherOverlay{z-index:35 !important;}
+.progressRing,.eggCounter{z-index:50 !important;}
+.thoughtBubble{z-index:52 !important;}
+
+/* Mobil */
+@media(max-width:700px){
+  .stage{min-height:610px !important;}
+  .asset-coop{width:54%;left:-2%;bottom:22%;}
+  .asset-feeder{width:28%;left:7%;bottom:4%;}
+  .asset-waterer{width:22%;right:3%;bottom:5%;}
+  .asset-dustbath{width:31%;right:20%;bottom:3%;}
+  .hero.phase-egg{bottom:19% !important;}
+  #nest{width:145px !important;height:100px !important;bottom:10% !important;}
+}

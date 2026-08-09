@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Slepička Tamagotchi 0.6.0 – Asset pack</title>
+<title>Slepička Tamagotchi 0.6.1 – Asset pack</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div id="root" class="app">
-  <div class="top"><div class="title">🐔 Slepička Tamagotchi 0.6.0</div><div class="pill" id="clock">--:--</div></div>
+  <div class="top"><div class="title">🐔 Slepička Tamagotchi 0.6.1</div><div class="pill" id="clock">--:--</div></div>
   <div id="newGame" class="card" style="margin-top:14px;display:none">
     <h2>Nové vajíčko</h2>
     <p class="small">Do hry je vložen nový ilustrovaný asset pack – kurník, slepička, kuřátko, vajíčko i farmářské doplňky.</p>
@@ -18,6 +18,12 @@
 
   <div id="game" class="grid">
     <div class="card stage" id="stageCard">
+      <div class="assetScene" aria-hidden="true">
+        <img class="asset asset-coop" src="assets/coop.png" alt="">
+        <img class="asset asset-feeder" src="assets/feeder.png" alt="">
+        <img class="asset asset-waterer" src="assets/waterer.png" alt="">
+        <img class="asset asset-dustbath" src="assets/dustbath.png" alt="">
+      </div>
       <div class="sceneAtmosphere"></div>
       <div class="sceneHills"><i class="hill h1"></i><i class="hill h2"></i><i class="hill h3"></i></div>
       <div class="sceneTrees"><i class="tree t1"></i><i class="tree t2"></i><i class="tree t3"></i><i class="tree t4"></i></div>
@@ -59,7 +65,7 @@
       <div id="panel-mini" class="panel"><p class="small">🌱 Hrabání ve výběhu: máš omezený počet hrábnutí. Po dešti je větší šance na červíky.</p><div id="miniInfo" class="miniStatus"></div><div class="minigame" id="minigame"></div><div id="miniResult" class="miniResult hidden"></div></div>
     </div>
   </div>
-  <div class="footer">Jablonec nad Nisou • počasí přes Open-Meteo • verze 0.6.0 • grafický asset pack</div>
+  <div class="footer">Jablonec nad Nisou • počasí přes Open-Meteo • verze 0.6.1 • grafický asset pack – oprava vykreslení</div>
 </div>
 <script src="js/game.js"></script>
 </body>
